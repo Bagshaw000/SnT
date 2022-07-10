@@ -1,6 +1,6 @@
 <?php
 //connect to the user account class
-include("../classes/general_class.php");
+include("../classes/user_class.php");
 include("../functions/function_store.php");
 
 //sanitize data
