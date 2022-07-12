@@ -30,22 +30,21 @@ class cart_class extends db_connection
 
 	//--UPDATE--//
 
-    function increase_cart_cls($pid,$cid){
-        $sql = "UPDATE `cart` SET qty = (qty + 1) WHERE `p_id`='$pid' AND `c_id`='$cid'";
+    function increase_cart_cls($pid,$uid){
+        $sql = "UPDATE `cart` SET qty = (qty + 1) WHERE `p_id`='$pid' AND `u_id`='$uid'";
         return $this->db_query($sql);
     }
 
-    function decrease_cart_cls($pid,$cid){
-        $sql = "UPDATE `cart` SET qty =(qty - 1)WHERE `p_id`='$pid' AND `c_id`='$cid'";
+    function decrease_cart_cls($pid,$uid){
+        $sql = "UPDATE `cart` SET qty =(qty - 1)WHERE `p_id`='$pid' AND `u_id`='$uid'";
         return $this->db_query($sql);
     }
 
 
 
 	//--DELETE--//
-    function delete_from_cart_cls($pid,$cid){
-        $sql= "DELETE FROM `cart` WHERE `p_id`='$pid' AND `c_id`=$cid";
-
+    function delete_from_cart_cls($pid,$uid){
+        $sql= "DELETE FROM `cart` WHERE `p_id`='$pid' AND `u_id`=$uid";
         return $this->db_query($sql);
 
     }
