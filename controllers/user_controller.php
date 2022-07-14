@@ -1,4 +1,5 @@
 <?php
+session_start(); 
 //connect to the user account class
 include("../classes/user_class.php");
 include("../functions/function_store.php");
@@ -26,12 +27,23 @@ function insert_user_ctr($first_name,$last_name,$email,$password){
    try {
     $data = new user_class();
     $hashed = password_hash(cleanText($password),PASSWORD_BCRYPT);
+    
     return $data-> insert_user_cls(cleanText($first_name),cleanText($last_name),cleanText($email),$hashed);
 
    } catch (Throwable $th) {
     throw $th;
    }
   
+}
+
+function insert_admin_ctr($email,$password){
+    try{
+        $data = new user_class();
+        $hashed = password_hash(cleanText($password),PASSWORD_BCRYPT);
+        return $data->insert_admin_cls($email,$hashed);
+    } catch(Throwable $th){
+     throw $th;   
+    }
 }
 
 //--SELECT--//
@@ -54,7 +66,7 @@ function select_user_ctr($email,$password){
         }
         else {
             $_SESSION['uid']=$user_data['u_id'];
-            $_SESSION['role']=$user_data['user_perm'];
+            $_SESSION['role']=$user_data['u_perm'];
             return true;
         }
 
@@ -62,7 +74,24 @@ function select_user_ctr($email,$password){
         throw $th;
     }
 }
+function select_admin_ctr($email,$password){
+    try {
+        $data = new user_class();
+        $user_data= $data->select_admin_cls($email);
+        if(empty($user_data)){
+            return null;
+        }elseif (verify_password($user_data['password'], $password)== false) {
+            return false;
+        }
+        else {
+            $_SESSION['aid']=$user_data['u_id'];
+            return true;
+        }
 
+    } catch (Throwable $th) {
+        throw $th;
+    }
+}
 //--UPDATE--//
 /**
  * This function gets the user email and id and updates the user email

@@ -1,5 +1,5 @@
 <?php
-	// landing/index page
+	header("Location: user/index.php");
 ?>
 
 	

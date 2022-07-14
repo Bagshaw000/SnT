@@ -13,6 +13,13 @@ function check_login(){
     return true;
 }
 
+function check_admin_login(){
+    if (!isset($_SESSION['aid'])){
+        return false;
+    }
+    return true;
+}
+
 //function to check login on the index page
 function check_login_index(){
     if (!isset($_SESSION['uid'])){

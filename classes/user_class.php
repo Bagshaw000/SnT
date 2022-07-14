@@ -1,6 +1,6 @@
 <?php
 //connect to database class
-require("../settings/db_class.php");
+require_once("../settings/db_class.php");
 
 /**
  * This class handles all the query for the user database
@@ -16,10 +16,17 @@ class user_class extends db_connection
      * @return bool
      */
     function insert_user_cls($first_name,$last_name,$email,$password){
-        $sql =" INSERT INTO `users`(`firstname`, `lastname`, `email`, `password`, `user_perm`)
-         VALUES ('$first_name','$last_name','$email','$password',1)";
-
+        $sql =" INSERT INTO `users`( `f_name`, `l_name`, `email`, `password`, `u_perm`)
+         VALUES ('$first_name','$last_name','$email','$password',1)";      
          return $this->db_query($sql);
+    }
+
+
+    function insert_admin_cls($email,$password){
+        $sql = "INSERT INTO `admin`(`email`, `password`)
+         VALUES ('$email','$password')";
+         return $this->db_query($sql);
+
     }
 	
 
@@ -31,6 +38,11 @@ class user_class extends db_connection
 
     function select_user_cls($email){
         $sql ="SELECT * FROM `users` WHERE `email`='$email'";
+
+        return $this->db_fetch_one($sql);
+    }
+    function select_admin_cls($email){
+        $sql ="SELECT * FROM `admin` WHERE `email`='$email'";
 
         return $this->db_fetch_one($sql);
     }

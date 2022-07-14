@@ -26,8 +26,10 @@ class db_connection
 		
 		//test the connection
 		if (mysqli_connect_errno()) {
+			
 			return false;
 		}else{
+		
 			return true;
 		}
 	}
