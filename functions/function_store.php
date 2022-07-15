@@ -14,3 +14,22 @@ function verify_password($hash_password, $password){
         return false;
     }
 }
+
+function upload_file($directory,$subdir,$tempname,$image){
+    //check if the directory exists 
+    //Then upload the file into the directory
+    $folder = "../$directory/$subdir/".$image;
+    if (!file_exists("../$directory/$subdir/")){
+        @mkdir("../$directory/$subdir/",0777);
+       
+        echo("Folder created");
+        move_uploaded_file($tempname,$folder);
+        return $folder;
+    }
+    else{
+        move_uploaded_file($tempname,$folder); 
+        return $folder;
+    }
+    return false;
+   
+}

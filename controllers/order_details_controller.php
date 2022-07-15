@@ -1,6 +1,6 @@
 <?php
 //connect to the user account class
-include("../classes/order_details_class.php");
+require_once("../classes/order_details_class.php");
 
 //sanitize data
 function cleanText($data) 

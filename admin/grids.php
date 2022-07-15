@@ -6,14 +6,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <?php
 //Getting neccessary files
-    require_once("../controllers/user_controller.php");
-    require_once("../controllers/book_controller.php");
-    require_once("../settings/core.php");
+     require_once("../controllers/product_controller.php");
+     require_once("../controllers/category_controller.php");
+   	 require_once("../settings/core.php");
 
     //Enforcing admin only success
-    if (!(is_user_signed_in() && is_session_user_admin())){
-        header("Location: ../web/login.php");
-    }
+	if (!(check_admin_login())) {
+		header("Location: signup/index.php");
+	}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -205,8 +205,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<span class="prfil-img"><img src="images/2.jpg" alt=""> </span>
 									<div class="user-name">
                                         <?php
-                                        $name = get_user_name_by_id_ctrl(get_session_user_id());
-                                            echo "<p> $name</p>";
+                                        // $name = get_user_name_by_id_ctrl(get_session_user_id());
+                                        //     echo "<p> $name</p>";
                                         ?>
 										<span>Administrator</span>
 									</div>
@@ -240,27 +240,27 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 				<table class="table">
   <thead>
     <tr>
-      <th scope="col">ISBN</th>
-      <th scope="col">Title</th>
-      <th scope="col">Author</th>
-      <th scope="col">item Price</th>
-      <th scope="col">Status</th>
+	  <th scope="col">Image</th>
+      <th scope="col">Category</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
 	<script src="../js/upload_book.js"></script>
 	<?php
-		$books = select_all_book_ctr();
+		 $prod = select_all_product_ctr();
 
-		foreach ($books as $item) {
 
-			$id = $item["book_id"];
-			$title = $item["title"];
-			$author = get_author_name_by_id_ctrl($item["author_id"]);
-			$price = $item["price"];
-			$status = $item["book_status"];
-			$image = $item["image_location"] ?? "images/1.jpg";
+		foreach ($prod as $item) {
+			$id = $item['p_id'];
+			$c_id = $item["cat_id"];
+			$cat = select_one_cat_ctr($c_id)['cat_name'];
+		
+			$price = $item["p_price"];
+			$desc = $item["p_desc"];
+			$image = $item["p_image"] ;
 
 			echo "<tr>";
 				echo "<td>
@@ -268,21 +268,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					<img  style='width: 5em;heigth:5em' src='$image' style='display:block'>
 					$id
 				</td>";
-				echo "<td>$title</td>\n";
-				echo "<td>$author</td>\n";
-				echo "<td>$price</td>\n";
-				echo "<td>\n
-					<select class='form-select' aria-label='Default select example' id='status_$id' onchange='return onStatusChange(this.id,this.value)'>\n";
-						$states = array("published","draft", "deleted");
-						foreach ($states as $current) {
-							if ($current == $status){
-								echo "<option value='$current' selected>$current</option>\n";
-							} else {
-								echo "<option value='$current'>$current</option>\n";
-							}
-						}
+				echo "<td>$cat</td>\n";
+				echo "<td>$desc</td>\n";
+				echo "<td>$ $price</td>\n";
+				
 				echo "<td><a href='media.php?id=$id' class='btn'>Edit</td>";
-					echo "</select></td>";
+				echo "<td><a href='media.php?id=$id' class='btn'>Delete</td>";
+				
 				echo "</tr>";
 		}
 	?>

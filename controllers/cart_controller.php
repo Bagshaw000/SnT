@@ -1,6 +1,6 @@
 <?php 
 
-include ("../classes/cart_class.php");
+require_once("../classes/cart_class.php");
 
 function cleanText($data) 
 {

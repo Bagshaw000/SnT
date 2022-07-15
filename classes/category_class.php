@@ -1,6 +1,6 @@
 <?php
 //connect to database class
-require("../settings/db_class.php");
+require_once("../settings/db_class.php");
 
 /**
 *Category class to handle all functions 

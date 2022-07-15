@@ -6,13 +6,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <?php
 //Getting neccessary files
-require_once("../controllers/order_controller.php");
-require_once("../controllers/user_controller.php");
+// require_once("../controllers/order_controller.php");
+ require_once("../controllers/payment_controller.php");
 require_once("../settings/core.php");
 
 //Enforcing admin only success
-if (!(is_user_signed_in() && is_session_user_admin())) {
-	header("Location: ../web/login.php");
+if (!(check_admin_login())) {
+    header("Location: signup/index.php");
 }
 ?>
 <!DOCTYPE HTML>
@@ -209,8 +209,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<span class="prfil-img"><img src="images/2.jpg" alt=""> </span>
 									<div class="user-name">
 										<?php
-										$name = get_user_name_by_id_ctrl(get_session_user_id());
-										echo "<p> $name</p>";
+										
 										?>
 										<span>Administrator</span>
 									</div>
@@ -250,58 +249,50 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<tr>
 										<th scope="col">User Name</th>
 										<th scope="col">Order ID</th>
-										<th scope="col">Transaction ID</th>
-										<th scope="col">Address </th>
 										<th scope="col">Amount</th>
-										<th scope="col">Status </th>
+										<th scope="col">Currency </th>
+										<th scope="col">Date of payment</th>
 									</tr>
 								</thead>
 								<tbody>
 									<script>
-										function onOrderStatusChange(order_id, status) {
-											event.preventDefault();
-											const xhttp = new XMLHttpRequest();
-											xhttp.open("POST", "/akenkan/actions/order_processor.php");
-											xhttp.onreadystatechange = function() {
-												if (xhttp.readyState == XMLHttpRequest.DONE) {
-													alert(xhttp.response);
-												}
-											}
-											xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-											xhttp.send("order_id=" + order_id + "&status=" + status);
+										// function onOrderStatusChange(order_id, status) {
+										// 	event.preventDefault();
+										// 	const xhttp = new XMLHttpRequest();
+										// 	xhttp.open("POST", "/akenkan/actions/order_processor.php");
+										// 	xhttp.onreadystatechange = function() {
+										// 		if (xhttp.readyState == XMLHttpRequest.DONE) {
+										// 			alert(xhttp.response);
+										// 		}
+										// 	}
+										// 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+										// 	xhttp.send("order_id=" + order_id + "&status=" + status);
 
-										}
+										// }
 									</script>
 									<?php
-									$orders = get_all_orders_ctrl();
+									$orders = select_payment_ctr();
+								
 									if ($orders) {
 										foreach ($orders as $item) {
 
-											$user = get_user_name_by_id_ctrl($item["user_id"]);
-											$order_id = $item["order_id"];
-											$transaction = $item["transaction_id"];
-											$address = $item["billing_address"];
-											$amount = $item["amount"];
-											$status = $item["order_status"];
+											$user_data=	select_user_id_ctr($item["u_id"]);
+											$user_name= $user_data['f_name'] +" "+$user_data['l_name'];
+											$order_id= $item["order_id"];
+											$amount= $item["amount"];
+											$pay_date= $item["payment_date"];
+											$currency = $item["currency"];
+											
 
 											echo "<tr>";
-											echo "<td>$user</td>\n";
+											echo "<td>$user_name</td>\n";
 											echo "<td>$order_id</td>\n";
-											echo "<td>$transaction</td>\n";
-											echo "<td>$address</td>\n";
-											echo "<td> GHS $amount</td>\n";
+											echo "<td>$amount</td>\n";
+											echo "<td>$currency</td>\n";
+											echo "<td> GHS $pay_date</td>\n";
 
-											echo "<td>\n
-												<select class='form-select' aria-label='Default select example' id='$order_id' onchange='return onOrderStatusChange(this.id,this.value)'>\n";
-											$states = array('processing', 'in shipping', 'delivered');
-											foreach ($states as $current) {
-												if ($current == $status) {
-													echo "<option value='$current' selected>$current</option>\n";
-												} else {
-													echo "<option value='$current'>$current</option>\n";
-												}
-											}
-											echo "</select></td>";
+											echo "<td>\n";
+											
 											echo "</tr>";
 										}
 									} else {

@@ -7,15 +7,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php
 //Getting neccessary files
 // require_once("../controllers/user_controller.php");
-// require_once("../controllers/book_controller.php");
+ require_once("../controllers/product_controller.php");
+ require_once("../controllers/category_controller.php");
  require_once("../settings/core.php");
- session_start();
- echo $_SESSION["aid"];
+ 
 
 //Enforcing admin only success
 if (!(check_admin_login())) {
 	header("Location: signup/index.php");
 }
+$prod= select_all_cat_ctr();
+
 
 ?>
 <!DOCTYPE HTML>
@@ -38,6 +40,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	</script>
 
 
+	<script src="js/submit.js">
 	<!-- Compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -77,6 +80,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	<script src="js/custom.js"></script>
 	<link href="css/custom.css" rel="stylesheet">
 	<!--//Metis Menu -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 
 </head>
 
@@ -207,152 +212,70 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					<div class="bs-example5 widget-shadow" data-example-id="default-media">
 						<!-- Button trigger modal -->
 
-						<form action='' enctype='multipart/form-data'>
+						<form id="fid" enctype='multipart/form-data'>
 							<div class="mb-3">
-								<label for="title" class="form-label">Book title</label>
-								<input type="text" class="form-control" id="title" aria-describedby="emailHelp">
+								<label for="title" class="form-label">Product name</label>
+								<input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">
+							</div>
+							
+							<div class="mb-3">
+								<label for="description" class="form-label">Product description</label>
+								<textarea class="form-control" id="description" name="description" rows="3"></textarea>
 							</div>
 							<div class="mb-3">
-								<label for="id" class="form-label">ISBN number</label>
-								<input type="text" class="form-control" id="id" aria-describedby="emailHelp">
+								<label for="price" class="form-label">Product price</label>
+								<input type="number" class="form-control" id="price" name="price" aria-describedby="emailHelp">
 							</div>
-							<div class="mb-3">
-								<label for="description" class="form-label">Book description</label>
-								<textarea class="form-control" id="description" rows="3"></textarea>
-							</div>
-							<div class="mb-3">
-								<label for="price" class="form-label">Book price</label>
-								<input type="number" class="form-control" id="price" aria-describedby="emailHelp">
-							</div>
-							<div class="mb-3">
-								<label for="publish_date" class="form-label">Date Published</label>
-								<input type="date" class="form-control" id="publish_date" aria-describedby="emailHelp">
-							</div>
-							<select class="form-select" aria-label="Default select example" id="status">
-								<option value="published" selected>Published</option>
-								<option value="draft">Draft</option>
-								<option value="deleted">Deleted</option>
+							
+							<select class="form-select" aria-label="Default select example" name="status" id="cat">
+								<?php
+									foreach($prod as $item){?>
+										<option value="<?php echo($item["cat_id"])?>" selected><?php echo($item["cat_name"]);
+										?></option>
+									<?php	}
+								?>	
+						
+								
 							</select>
 							<div class="mb-3">
-								<label for="formFile" class="form-label">Book image</label>
+								<label for="formFile" class="form-label">Product image</label>
 								<input class="form-control" type="file" accept="image/*" id="image">
 							</div>
 
-							<div id="b-drop">
-								<?php
-								$authors = get_all_authors_ctrl();
-								$genres = get_all_genres_ctrl();
-								$publishers = get_all_publishers_ctrl();
-
-								// ======================================Author drop down
-								echo "<select class='form-select' aria-label='Default select example' id='author'>";
-								foreach ($authors as $item) {
-									$id = $item["author_id"];
-									$name = $item["author_name"];
-									echo "<option value='$id'>$name</option>";
-								}
-								echo "</select>";
-								// ======================================Genre drop down
-								echo "<div id='space1'></div>";
-								echo "<select class='form-select' aria-label='Default select example' id='genre'>";
-								foreach ($genres as $item) {
-									$name = $item["genre_name"];
-									echo "<option value='$name'>$name</option>";
-								}
-								echo "</select>";
-								// ======================================Publisher drop down
-								echo "<div id='b-drop'>";
-								echo "<select class='form-select' aria-label='Default select example' id='publisher'>";
-								foreach ($publishers as $item) {
-									$id = $item["publisher_id"];
-									$name = $item["publisher_name"];
-									echo "<option value='$id'>$name</option>";
-								}
-								echo "</select>";
-								echo "</div>";
-								?>
-								<!-- <div class="mb-3">
-								<label for="exampleInputEmail1" class="form-label">Date Added</label>
-								<input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-							</div> -->
-
-							</div>
+						
 
 
 
-							<script src="../js/upload_book.js">
-							</script>
-							<?php
-							if (isset($_GET["id"])) {
-								//edit function
-								$function = "onBookEdit";
-							} else {
-								$function = "upload_image";
-								// $function = "onBookUpload";
-								// Add function
-
-							}
-							echo "<button type='submit' class='btn btn-primary' onclick='$function()'>Submit</button>";
-							?>
+						
+							
+							
+							 <button type='submit' class='btn btn-primary' name="submit" onclick="addProduct()">Submit</button>
+						
 
 						</form>
+					
 
 
 					</div>
-					<h2 class="title1">Add Author</h2>
+					<h2 class="title1">Add Category</h2>
 					<div class="bs-example5 widget-shadow" data-example-id="default-media">
 						<!-- Button trigger modal -->
 
 						<form>
 							<div class="mb-3">
 								<label for="author_name" class="form-label">Author name</label>
-								<input type="text" class="form-control" id="author_name" aria-describedby="emailHelp">
-								<div id="author_help" class="form-text">Enter the authors name</div>
+								<input type="text" class="form-control" id="cat_name" aria-describedby="emailHelp">
+								<div id="author_help" class="form-text">Enter catergory</div>
 							</div>
 
-							<button type="submit" onclick="onAuthorCreate()" class="btn btn-primary">Submit</button>
+							<button type="submit" onclick="onAddCat()" class="btn btn-primary">Submit</button>
 						</form>
 
 
 					</div>
-					<h2 class="title1">Add Genre</h2>
-					<div class="bs-example5 widget-shadow" data-example-id="default-media">
-						<!-- Button trigger modal -->
+					
 
-						<form>
-							<div class="mb-3">
-								<label for="genre_name" class="form-label">Genre</label>
-								<input type="text" class="form-control" id="genre_name" aria-describedby="emailHelp">
-								<div id="genre_help" class="form-text">Enter the genre name</div>
-							</div>
-
-							<button type="submit" onclick="onGenreCreate()" class="btn btn-primary">Submit</button>
-						</form>
-
-
-					</div>
-
-					<h2 class="title1">Add Publisher</h2>
-					<div class="bs-example5 widget-shadow" data-example-id="default-media">
-						<!-- Button trigger modal -->
-
-						<form>
-							<div class="mb-3">
-								<label for="publisher_name" class="form-label">Publisher name</label>
-								<input type="text" class="form-control" id="publisher_name" aria-describedby="emailHelp">
-								<div id="publisher_help" class="form-text">Pls enter the Publisher's name</div>
-							</div>
-
-							<?php
-							if (isset($_GET["id"])) {
-							} else {
-							}
-							?>
-							<button type="submit" onclick="onPublisherCreate()" class="btn btn-primary">Submit</button>
-						</form>
-
-
-					</div>
+				
 
 					<div class="clearfix"> </div>
 				</div>

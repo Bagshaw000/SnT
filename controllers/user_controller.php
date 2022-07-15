@@ -1,8 +1,8 @@
 <?php
 session_start(); 
 //connect to the user account class
-include("../classes/user_class.php");
-include("../functions/function_store.php");
+require_once("../classes/user_class.php");
+require_once("../functions/function_store.php");
 
 //sanitize data
 function cleanText($data) 
@@ -74,6 +74,18 @@ function select_user_ctr($email,$password){
         throw $th;
     }
 }
+
+function select_all_user_ctr(){
+    try{
+        $data = new user_class();
+        $user_data=  $data->select_all_user_cls();
+        return count($user_data);
+    }
+    catch(Throwable $th){
+        throw $th;
+
+    }
+}
 function select_admin_ctr($email,$password){
     try {
         $data = new user_class();
@@ -92,6 +104,22 @@ function select_admin_ctr($email,$password){
         throw $th;
     }
 }
+
+function select_user_id_ctr($id){
+    $data = new user_class();
+    return $user_data= $data-> select_user_id_cls($id);
+}
+
+
+function select_processing_orders_ctr(){
+    $data = new user_class();
+    return count($data->select_processing_orders_cls());
+  }
+  
+  function select_delivered_orders_cls(){
+    $data = new user_class();
+    return count($data->select_delivered_orders_cls());
+  }
 //--UPDATE--//
 /**
  * This function gets the user email and id and updates the user email

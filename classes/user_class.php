@@ -47,6 +47,34 @@ class user_class extends db_connection
         return $this->db_fetch_one($sql);
     }
 
+    function select_user_id_cls($id){
+        $sql ="SELECT * FROM `users` WHERE `u_id`='$id'";
+
+        return $this->db_fetch_one($sql);
+    }
+
+    function select_all_user_cls(){
+        $sql ="SELECT * FROM `users`";
+
+        return $this->db_fetch_all($sql);
+
+    }
+    function select_processing_orders_cls(){
+        $sql = "SELECT * FROM `orders` WHERE `order_status` = 'processing'";
+
+        return $this->db_fetch_all($sql);
+
+    }
+
+    function select_delivered_orders_cls(){
+        $sql = "SELECT * FROM `orders` WHERE `order_status` = 'delivered'";
+
+        return $this->db_fetch_all($sql);
+
+    }
+
+
+
 
 
 	//--UPDATE--//

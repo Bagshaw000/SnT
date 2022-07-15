@@ -1,6 +1,6 @@
 <?php
 //connect to database class
-require("../settings/db_class.php");
+require_once("../settings/db_class.php");
 
 /**
 *Product class to handle all functions 
@@ -21,10 +21,12 @@ class product_class extends db_connection
 
 	//--SELECT--//
 
-    function insert_one_product_cls($cat_id,$p_desc,$p_price,$p_image){
-        $sql="INSERT INTO `product`(`cat_id`, `p_desc`, `p_price`, `p_image`) VALUES ('$cat_id','$p_desc','$p_price','$p_image')";
+    function insert_one_product_cls($p_name,$cat_id,$p_desc,$p_price,$p_image){
+        $sql="INSERT INTO `product`(`p_name`,`cat_id`, `p_desc`, `p_price`, `p_image`) VALUES ('$p_name','$cat_id','$p_desc','$p_price','$p_image')";
         return $this->db_query($sql);   
     }
+
+    
 
 	//--UPDATE--//
 

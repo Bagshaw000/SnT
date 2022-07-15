@@ -1,6 +1,6 @@
 <?php
 //connect to database class
-require("../settings/db_class.php");
+require_once("../settings/db_class.php");
 
 /**
 *Payment class to handle all functions 
@@ -17,10 +17,16 @@ class payment_class extends db_connection
         $sql ="INSERT INTO `payment`( `u_id`, `order_id`, `amount`, `currency`, `payment_date`)
          VALUES ('$u_id','$order_id','$amt','$currency','$p_date')";
 
-         return $this-db_query($sql);
+         return $this->db_query($sql);
     }
 
 	//--SELECT--//
+
+	function select_payment_cls(){
+		$sql="SELECT * FROM `payment`";
+
+		return $this->db_fetch_all($sql);
+	}
 
 
 

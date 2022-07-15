@@ -1,6 +1,6 @@
 <?php
 //connect to database class
-require("../settings/db_class.php");
+require_once("../settings/db_class.php");
 
 /**
 *Order class to handle all functions 
@@ -13,9 +13,9 @@ require("../settings/db_class.php");
 class orders_class extends db_connection
 {
 	//--INSERT--//
-    function insert_orders_cls($uid,$invoice,$order_date,$order_status){
-        $sql = "INSERT INTO `orders`( `u_id`, `invoice_no`, `order_date`, `order_status`)
-         VALUES ('$uid','$invoice','$order_date','$order_status')";
+    function insert_orders_cls($uid,$invoice,$order_date,$order_address,$order_status){
+        $sql = "INSERT INTO `orders`( `u_id`, `invoice_no`, `order_date`, `order_address`, `order_status`)
+         VALUES ('$uid','$invoice','$order_date','$order_address','$order_status')";
 
         return $this->db_query($sql);
     }
@@ -29,7 +29,7 @@ class orders_class extends db_connection
         return $this->db_fetch_all($sql);
     }
 
-
+   
 
 	//--UPDATE--//
 

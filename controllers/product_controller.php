@@ -1,6 +1,6 @@
 <?php
 //connect to the user account class
-include("../classes/product_class.php");
+require_once("../classes/product_class.php");
 
 //sanitize data
 function cleanText($data) 
@@ -20,9 +20,9 @@ function select_all_product_ctr(){
 }
 
 //--SELECT--//
-function insert_one_product_ctr($cat_id,$p_desc,$p_price,$p_image){
+function insert_one_product_ctr($p_name,$cat_id,$p_desc,$p_price,$p_image){
     $data = new product_class();
-    return $data->insert_one_product_cls($cat_id,$p_desc,$p_price,$p_image);
+    return $data->insert_one_product_cls($p_name,$cat_id,$p_desc,$p_price,$p_image);
 }
 //--UPDATE--//
 

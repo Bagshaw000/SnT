@@ -11,11 +11,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 // require_once("../controllers/book_controller.php");
 // require_once("../controllers/claim_controller.php");
 require_once("../settings/core.php");
+include("../controllers/user_controller.php");
+//include("../controllers/orders_controller.php");
+
 
 //Enforcing admin only success
 if (!(check_admin_login())) {
     header("Location: signup/index.php");
 }
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -315,7 +319,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
                             <div class="stats">
                                 <h5><strong><?php
-                                    // echo get_user_count_ctrl();
+                                    echo(select_all_user_ctr());
                                 ?></strong></h5>
                                 <span>Total Users</span>
                             </div>
@@ -326,29 +330,19 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <i class="pull-left fa fa-laptop user1 icon-rounded"></i>
                             <div class="stats">
                                 <h5><strong><?php 
-                                //echo count_orders_by_status_ctrl("processing")
+                                echo select_processing_orders_ctr();
                                  ?></strong></h5>
                                 <span>Processing</span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 widget widget1">
-                        <div class="r3_counter_box">
-                            <i class="pull-left fa fa-money user2 icon-rounded"></i>
-                            <div class="stats">
-                            <h5><strong><?php 
-                            // echo count_orders_by_status_ctrl("in shipping") 
-                            ?></strong></h5>
-                                <span>In Shipping</span>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="col-md-3 widget widget1">
                         <div class="r3_counter_box">
                             <i class="pull-left fa fa-pie-chart dollar1 icon-rounded"></i>
                             <div class="stats">
                             <h5><strong><?php 
-                            // echo count_orders_by_status_ctrl("delivered") 
+                             echo select_delivered_orders_cls() 
                             ?></strong></h5>
                                 <span>Delivered</span>
                             </div>

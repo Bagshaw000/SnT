@@ -1,6 +1,6 @@
 <?php
 //connect to the user account class
-include("../classes/payment_class.php");
+require_once("../classes/payment_class.php");
 
 //sanitize data
 function cleanText($data) 
@@ -18,6 +18,11 @@ function insert_payment_ctr($u_id, $order_id, $amt,$currency,$p_date){
 }
 
 //--SELECT--//
+
+function select_payment_ctr(){
+  $data = new payment_class();
+  return $data->select_payment_cls();
+}
 
 //--UPDATE--//
 
