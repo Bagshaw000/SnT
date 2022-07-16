@@ -35,7 +35,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- <script src="js/jquery-1.11.0.min.js"></script> -->
 <script src="signup/js/cart.js"></script>
 
-
+<!-- 
 
 <script>$(document).ready(function(c) {
 	$('.close').on('click', function(c){
@@ -53,7 +53,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		});
 	});	  
 });
-</script>
+</script> -->
 </head>
 <body>
 <!-- <div class="logo">

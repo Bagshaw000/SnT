@@ -34,8 +34,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <!-- <script src="js/jquery-1.11.0.min.js"></script> -->
 <script src="signup/js/cart.js"></script>
-
-
+<script src="https://js.paystack.co/v1/inline.js"></script> 
+<!-- 
 
 <script>$(document).ready(function(c) {
 	$('.close').on('click', function(c){
@@ -52,7 +52,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	  		$('.cake-bottom').remove();
 		});
 	});	  
-});
+}); -->
 </script>
 </head>
 <body>
@@ -78,7 +78,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="cart" >
    <div class="cart-top" >
    	  <div class="cart-experience">
-   	  	 <h4>Cart Page</h4>
+   	  	 <h4>Checkout Page</h4>
    	  </div>
    	  <div class="cart-login">
    	  	 <div class="cart-login-img">
@@ -115,6 +115,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
        
             $total = select_total_price_ctr($_SESSION['uid']);
             $item_data=select_prod_cart_ctr($_SESSION['uid']);
+            print_r($item_data);
+            
+            echo($item_data[0]['email']);
+           
     
 			 foreach($item_data as $item){
 			 ?>
@@ -161,7 +165,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
               echo $total["SUM(product.p_price * cart.qty)"] ?></h1>
    	 		<div class="tot-btn">
    	 			<a class="shop" href="index.php">Back to Shop</a>
-   	 			<a class="check" onclick="">Pay</a>
+   	 			<a class="check" onclick="payment('<?php echo $item_data[0]['email']?>','<?php echo $total['SUM(product.p_price * cart.qty)'] ?>')">Pay</a>
    	 		</div>
    	 	</div>
    	   <div class="clear"> </div>
