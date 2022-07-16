@@ -6,14 +6,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <?php
 //Getting neccessary files
-require_once("../controllers/claim_controller.php");
-require_once("../controllers/user_controller.php");
+// require_once("../controllers/claim_controller.php");
+// require_once("../controllers/user_controller.php");
 require_once("../settings/core.php");
 
 //Enforcing admin only success
-if (!(is_user_signed_in() && is_session_user_admin())) {
-	header("Location: login.php");
-}
+// if (!(is_user_signed_in() && is_session_user_admin())) {
+// 	header("Location: login.php");
+// }
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -211,8 +211,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<span class="prfil-img"><img src="images/2.jpg" alt=""> </span>
 									<div class="user-name">
 										<?php
-										$name = get_user_name_by_id_ctrl(get_session_user_id());
-										echo "<p> $name</p>";
+										// $name = get_user_name_by_id_ctrl(get_session_user_id());
+										// echo "<p> $name</p>";
 										?>
 										<span>Administrator</span>
 									</div>
@@ -226,7 +226,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<li> <a href="#"><i class="fa fa-user"></i> My Account</a> </li>
 								<li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li>
 
-								<?php echo "<li> <a href='#' onclick='onsignout()' ><i class='fa fa-sign-out'></i> Logout</a> </li>"; ?>
+								<?php 
+								// echo "<li> <a href='#' onclick='onsignout()' ><i class='fa fa-sign-out'></i> Logout</a> </li>"; ?>
 							</ul>
 						</li>
 					</ul>
@@ -262,43 +263,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</thead>
 								<tbody>
 									<script src="../js/claim.js"></script>
-									<?php
-									$claims = get_all_claims_ctrl();
-									if ($claims) {
-										foreach ($claims as $item) {
-
-
-											$user = get_user_name_by_id_ctrl($item["user_id"]);
-											$claim_id = $item["claim_id"];
-											$message = $item["message"];
-											$status = $item["claim_status"];
-
-											echo "<tr>";
-											echo "<td>$user</td>\n";
-											echo "<td>$claim_id</td>\n";
-											echo "<td>$message</td>\n";
-
-											echo "<td>\n
-												<select class='form-select'id='status_$claim_id' onchange='return onClaimChange(this.id,this.value)'>\n";
-													$states = array("closed", "opened");
-													foreach ($states as $current) {
-														if ($current == $status) {
-															echo "<option value='$current' selected>$current</option>\n";
-														} else {
-															echo "<option value='$current'>$current</option>\n";
-														}
-													}
-											echo "</select></td>";
-											echo "</tr>";
-										}
-									} else {
-										echo "<tr><td></td><td></td><td>No Claims yet</td><td></td></tr>";
-									}
-									?>
+									
 
 
 								</tbody>
+								
 							</table>
+							<?php
+									echo("Coming Soon..");
+									?>
 						</div>
 
 					</div>

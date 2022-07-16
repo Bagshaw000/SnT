@@ -6,15 +6,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <?php
 //Getting neccessary files
-require_once("../controllers/user_controller.php");
-require_once("../controllers/book_controller.php");
-require_once("../controllers/review_controller.php");
+
 require_once("../settings/core.php");
 
 //Enforcing admin only success
-if (!(is_user_signed_in() && is_session_user_admin())) {
-	header("Location: login.php");
-}
+// if (!(is_user_signed_in() && is_session_user_admin())) {
+// 	header("Location: login.php");
+// }
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -78,7 +76,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<h1><a class="navbar-brand" href="index.php"><span class="fa fa-area-chart"></span> Akenkan<span class="dashboard_text">Design dashboard</span></a></h1>
+						<h1><a class="navbar-brand" href="index.php"><span class="fa fa-area-chart"></span> SnT<span class="dashboard_text">Design dashboard</span></a></h1>
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="sidebar-menu">
@@ -163,8 +161,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<span class="prfil-img"><img src="images/2.jpg" alt=""> </span>
 									<div class="user-name">
 										<?php
-										$name = get_user_name_by_id_ctrl(get_session_user_id());
-										echo "<p> $name</p>";
+										
 										?>
 										<span>Administrator</span>
 									</div>
@@ -178,7 +175,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<li> <a href="#"><i class="fa fa-user"></i> My Account</a> </li>
 								<li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li>
 
-								<?php echo "<li> <a href='#' onclick='onsignout()' ><i class='fa fa-sign-out'></i> Logout</a> </li>"; ?>
+								<?php 
+								//echo "<li> <a href='#' onclick='onsignout()' ><i class='fa fa-sign-out'></i> Logout</a> </li>"; ?>
 							</ul>
 						</li>
 					</ul>
@@ -215,31 +213,34 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</thead>
 								<tbody>
 									<?php
-									$reviews = get_all_reviews_ctrl();
-									if ($reviews){
-									foreach ($reviews as $item) {
+									// $reviews = get_all_reviews_ctrl();
+									// if ($reviews){
+									// foreach ($reviews as $item) {
 
 
-										$user = get_user_name_by_id_ctrl($item["user_id"]);
-										$title = select_book_by_id_ctrl($item["book_id"])["title"];
-										$stars = $item["num_of_stars"];
-										$comment = $item["review_comment"];
+									// 	$user = get_user_name_by_id_ctrl($item["user_id"]);
+									// 	$title = select_book_by_id_ctrl($item["book_id"])["title"];
+									// 	$stars = $item["num_of_stars"];
+									// 	$comment = $item["review_comment"];
 
-										echo "<tr>";
-										echo "<td>$user</td>\n";
-										echo "<td>$title</td>\n";
-										echo "<td>$comment</td>\n";
-										echo "<td>$stars</td>\n";
-										echo "</tr>";
-									}
-									} else {
-										echo "<tr><td></td><td></td><td>No Reviews yet</td><td></td></tr>";
-									}
+									// 	echo "<tr>";
+									// 	echo "<td>$user</td>\n";
+									// 	echo "<td>$title</td>\n";
+									// 	echo "<td>$comment</td>\n";
+									// 	echo "<td>$stars</td>\n";
+									// 	echo "</tr>";
+									// }
+									// } else {
+									// 	echo "<tr><td></td><td></td><td>No Reviews yet</td><td></td></tr>";
+									// }
 									?>
 
 
 								</tbody>
 							</table>
+							<?php
+							echo("Coming Soon...");
+							?>
 						</div>
 
 

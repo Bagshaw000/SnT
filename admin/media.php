@@ -98,7 +98,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<h1><a class="navbar-brand" href="index.php"><span class="fa fa-area-chart"></span> Akenkan<span class="dashboard_text">Design dashboard</span></a></h1>
+						<h1><a class="navbar-brand" href="index.php"><span class="fa fa-area-chart"></span> SnT <span class="dashboard_text">Design dashboard</span></a></h1>
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="sidebar-menu">
@@ -374,49 +374,49 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.js"> </script>
 
-	<script>
-		var query = new URLSearchParams(window.location.search);
-		if (query.has("id")) {
-			const g = new XMLHttpRequest();
-			g.open("POST", "/akenkan/actions/book_processor.php");
-			g.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			g.onreadystatechange = function() {
-				if (g.readyState == XMLHttpRequest.DONE) {
-					var json = JSON.parse(g.response)["genre_name"];
-					var select = document.getElementById("genre");
-					if (select.value != json){
-						select.value = json;
-					}
-				}
-			}
-			g.send("action=get_genre&id=" + query.get("id"));
+	// <script>
+	// 	var query = new URLSearchParams(window.location.search);
+	// 	if (query.has("id")) {
+	// 		const g = new XMLHttpRequest();
+	// 		g.open("POST", "/akenkan/actions/book_processor.php");
+	// 		g.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	// 		g.onreadystatechange = function() {
+	// 			if (g.readyState == XMLHttpRequest.DONE) {
+	// 				var json = JSON.parse(g.response)["genre_name"];
+	// 				var select = document.getElementById("genre");
+	// 				if (select.value != json){
+	// 					select.value = json;
+	// 				}
+	// 			}
+	// 		}
+	// 		g.send("action=get_genre&id=" + query.get("id"));
 
 
-			const xhttp = new XMLHttpRequest();
-			xhttp.open("POST", "/akenkan/actions/book_processor.php");
-			xhttp.onreadystatechange = function() {
-				if (xhttp.readyState == XMLHttpRequest.DONE) {
-					var json = JSON.parse(xhttp.response);
+	// 		const xhttp = new XMLHttpRequest();
+	// 		xhttp.open("POST", "/akenkan/actions/book_processor.php");
+	// 		xhttp.onreadystatechange = function() {
+	// 			if (xhttp.readyState == XMLHttpRequest.DONE) {
+	// 				var json = JSON.parse(xhttp.response);
 
-					document.getElementById("id").value = json["book_id"];
-					document.getElementById("title").value = json["title"];
-					document.getElementById("description").value = json["description"];
-					document.getElementById("publish_date").value = json["publish_date"].split(" ")[0];
-					document.getElementById("status").value = json["book_status"];
-					document.getElementById("author").value = json["author_id"];
-					document.getElementById("publisher").value = json["publisher_id"];
-					document.getElementById("price").value = json["price"];
-
-
+	// 				document.getElementById("id").value = json["book_id"];
+	// 				document.getElementById("title").value = json["title"];
+	// 				document.getElementById("description").value = json["description"];
+	// 				document.getElementById("publish_date").value = json["publish_date"].split(" ")[0];
+	// 				document.getElementById("status").value = json["book_status"];
+	// 				document.getElementById("author").value = json["author_id"];
+	// 				document.getElementById("publisher").value = json["publisher_id"];
+	// 				document.getElementById("price").value = json["price"];
 
 
-				}
-			}
-			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xhttp.send("action=get_book&id=" + query.get("id"));
 
-		}
-	</script>
+
+	// 			}
+	// 		}
+	// 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	// 		xhttp.send("action=get_book&id=" + query.get("id"));
+
+	// 	}
+	// </script>
 </body>
 
 </html>

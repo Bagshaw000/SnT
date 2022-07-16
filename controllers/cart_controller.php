@@ -24,7 +24,7 @@ function insert_cart_ctr($pid,$ip_add,$uid,$qty){
 function insert_cart_ip_ctr($pid,$ip_add,$qty){
     $data = new cart_class();
     if (empty($data->select_prod_ip_cls($pid, $ip_add))){
-       return  $data->insert_cart_cls($pid,$ip_add,$qty);
+       return  $data->insert_cart_ip_cls($pid,$ip_add,$qty);
     }
     else{
         return $data->increase_cart_ip_cls($pid,$ip_add);

@@ -2,6 +2,7 @@
 require_once("../controllers/orders_controller.php");
 require_once("../controllers/cart_controller.php");
 require_once("../controllers/order_details_controller.php");
+require_once("../controllers/payment_controller.php");
 require_once("../functions/function_store.php");
 session_start();
 $email = $_POST["email"];
@@ -16,6 +17,7 @@ $uid= $_SESSION['uid'];
 //inserting into the orders table
 insert_orders_ctr($uid,$ref,$date,$bill_add,$order_stat);
 
+
 $order = get_last_order_ctr();
 $cart=select_cart_user_ctr(get_ip_add());
 
@@ -25,6 +27,7 @@ foreach ( $cart as $item){
     // remove_item_by_customer_ctrl($item['book_id'],$item['user_id']);
     delete_from_cart_ctr($item['p_id'],get_ip_add());
 }
+insert_payment_ctr($_SESSION['uid'], $order['order_id'], $amt,"GHS",$date);
 
 
 
@@ -49,6 +52,8 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 
 //So that curl_exec returns the contents of the cURL; rather than echoing it
 curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
+$result = curl_exec($ch);
+echo $result;
 
 //execute post
 $result = curl_exec($ch);

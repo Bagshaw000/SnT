@@ -2,7 +2,11 @@
 <?php
 require_once("../settings/core.php");
 require_once("../controllers/user_controller.php");
+require_once("../controllers/product_controller.php");
+require_once("../controllers/cart_controller.php");
 // echo($_SESSION['uid']);
+
+$cart_data= select_cart_count_ctr(get_ip_add());
 
 
 ?>
@@ -98,23 +102,14 @@ Author URL: http://w3layouts.com
 
                         <?php } ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Cart()</a>
+                            <a class="nav-link" href="cart.php">Cart(<?php echo $cart_data?>)</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.php">Contact Us</a>
                         </li>
                         
                         <!-- search button -->
-                        <div class="search-right">
-                            <form action="#search" method="GET" class="search-box position-relative">
-                                <div class="input-search">
-                                    <input type="search" placeholder="Enter Keyword" name="search" required="required"
-                                        autofocus="" class="search-popup">
-                                </div>
-                                <button type="submit" class="btn search-btn"><i class="fa fa-search"
-                                        aria-hidden="true"></i></button>
-                            </form>
-                        </div>
+                      
                         <!-- //search button -->
                     </ul>
                 </div>
@@ -191,10 +186,8 @@ Author URL: http://w3layouts.com
                     </div>
                 </div>
                 <div class="col-lg-6 about-2-secs-left pl-lg-5 mt-lg-0 mt-5">
-                    <h3 class="title-style mb-3">The Amazing Bitros & <br>Delicious Food</h3>
-                    <p class="mt-4">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                        praesentium voluptatum
-                        deleniti similique sunt in culpa qui officia</p>
+                    <h3 class="title-style mb-3">The Amazing SnT & <br>Delicious Food</h3>
+                    <p class="mt-4">At SnT we bring you nutritious home cooked meal at budget friendly prices</p>
                     <div class="address-sec d-flex align-items-center mt-5">
                         <i class="fa fa-map-marker mr-4" aria-hidden="true"></i>
                         <h6>10001 Alleghany st, <br>5th Avenue, 235 Terry, <br>London.</h6>

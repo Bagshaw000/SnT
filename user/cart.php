@@ -138,7 +138,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
    	 	     	</td>
    	 	     	<td class="price">
    	 	     		<h4><?php 
-                     echo("AUD"); echo($item["p_price"]); ?></h4>	 	     		
+                     echo("GHC"); echo($item["p_price"]); ?></h4>	 	     		
    	 	     	</td>
    	 	     	<td class="top-remove">
    	 	     		<h4><?php echo("GHC"); echo($item["p_price"] * $item["qty"]); ?></h4>

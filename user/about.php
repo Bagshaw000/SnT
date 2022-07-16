@@ -1,7 +1,14 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
--->
+<?php
+require_once("../settings/core.php");
+require_once("../controllers/user_controller.php");
+require_once("../controllers/product_controller.php");
+require_once("../controllers/cart_controller.php");
+// echo($_SESSION['uid']);
+
+$cart_data= select_cart_count_ctr(get_ip_add());
+
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -9,10 +16,14 @@ Author URL: http://w3layouts.com
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Bistros - Restaurants Category Responsive Website Template - About : W3Layouts</title>
+    <title>SnT - Restaurants Category Responsive Website Template - About : W3Layouts</title>
     <!-- google-fonts -->
     <link href="//fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap"
         rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    
     <!-- //google-fonts -->
     <!-- Template CSS Style link -->
     <link rel="stylesheet" href="assets/css/style-starter.css">
@@ -25,7 +36,7 @@ Author URL: http://w3layouts.com
             <nav class="navbar navbar-expand-lg stroke">
                 <h1>
                     <a class="navbar-brand d-flex align-items-center" href="index.php">
-                        Bistros <i class="fa fa-cutlery ml-2" aria-hidden="true"></i></a>
+                        SnT <i class="fa fa-cutlery ml-2" aria-hidden="true"></i></a>
                 </h1>
                 <!-- if logo is image enable this   
     <a class="navbar-brand" href="#index.php">
@@ -40,30 +51,62 @@ Author URL: http://w3layouts.com
 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav ml-lg-auto">
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="about.php">About Us</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="menu.php">Menu</a>
                         </li>
+                        <?php if (!(check_login())) {
+                            
+                            ?>
+                        <li class="nav-item">
+                            <div class="dropdown-center">
+                                <a class="btn btn-secondary dropdown-toggle light" style="background-color: transparent;border: 0px"
+                                 href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    ACCOUNT
+                                </a>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="signup">Login</a></li>
+                                    <li><a class="dropdown-item" href="#">Sign Up</a></li>
+                                   
+                                </ul>
+                            </div>
+                        </li>
+
+                        <?php
+                        }else{?>
+                           <li class="nav-item">
+                            <div class="dropdown-center">
+                                <a class="btn btn-secondary dropdown-toggle nav-link" style="background-color: transparent;border: 0px"
+                                 href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    ACCOUNT
+                                </a>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="signup">Logout</a></li>
+                                    <li><a class="dropdown-item" href="#">Sign Up</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
+
+                        <?php } ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cart.php">Cart(<?php echo $cart_data?>)</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.php">Contact Us</a>
                         </li>
+                        
                         <!-- search button -->
-                        <div class="search-right">
-                            <form action="#search" method="GET" class="search-box position-relative">
-                                <div class="input-search">
-                                    <input type="search" placeholder="Enter Keyword" name="search" required="required"
-                                        autofocus="" class="search-popup">
-                                </div>
-                                <button type="submit" class="btn search-btn"><i class="fa fa-search"
-                                        aria-hidden="true"></i></button>
-                            </form>
-                        </div>
+                      
                         <!-- //search button -->
+                    
                     </ul>
                 </div>
                 <!-- toggle switch for light and dark theme -->
@@ -373,7 +416,7 @@ Author URL: http://w3layouts.com
                 <div class="w3l-footer-texthny-inf">
                     <h2>
                         <a class="d-flex align-items-center logo-2" href="index.php">
-                            Bistros <i class="fa fa-cutlery ml-2" aria-hidden="true"></i></a>
+                            SnT <i class="fa fa-cutlery ml-2" aria-hidden="true"></i></a>
                     </h2>
                     <div class="footer-list-cont d-flex align-items-center justify-content-between mt-md-5 mt-4 mb-5">
                         <h6 class="foot-sub-title">Contact Us</h6>
@@ -400,8 +443,8 @@ Author URL: http://w3layouts.com
                         </div>
                         <div class="address-grid mt-sm-5 mt-4">
                             <h5>E-mail</h5>
-                            <h5 class="email-cont-text mt-1"> <a href="mailto:bistros@mail.com"
-                                    class="mail">bistros@mail.com</a></h5>
+                            <h5 class="email-cont-text mt-1"> <a href="mailto:SnT@mail.com"
+                                    class="mail">SnT@mail.com</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-6 col-sm-5 footer-list-menu pl-lg-0 mt-lg-0 mt-sm-5 mt-4">
@@ -427,7 +470,7 @@ Author URL: http://w3layouts.com
                 <!-- copyright -->
                 <div class="w3l-copyright mt-lg-5 mt-sm-4 pt-md-4 pt-3">
                     <div class="row bottom-copies pt-md-5 pt-4 mt-md-5 mt-4">
-                        <p class="col-lg-8 copy-footer-29">© 2021 Bistros. All rights reserved. Design by <a
+                        <p class="col-lg-8 copy-footer-29">© 2021 SnT. All rights reserved. Design by <a
                                 href="https://w3layouts.com/" target="_blank">
                                 W3layouts</a></p>
 

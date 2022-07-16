@@ -79,7 +79,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="index.php"><span class="fa fa-area-chart"></span> Akenkan<span class="dashboard_text">Design Dashboard</span></a>
+						<a class="navbar-brand" href="index.php"><span class="fa fa-area-chart"></span> SnT<span class="dashboard_text">Design Dashboard</span></a>
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="sidebar-menu">
@@ -259,7 +259,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 										// function onOrderStatusChange(order_id, status) {
 										// 	event.preventDefault();
 										// 	const xhttp = new XMLHttpRequest();
-										// 	xhttp.open("POST", "/akenkan/actions/order_processor.php");
+										// 	xhttp.open("POST", "/SnT/actions/order_processor.php");
 										// 	xhttp.onreadystatechange = function() {
 										// 		if (xhttp.readyState == XMLHttpRequest.DONE) {
 										// 			alert(xhttp.response);

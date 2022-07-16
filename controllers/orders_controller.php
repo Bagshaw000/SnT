@@ -30,6 +30,11 @@ function get_last_order_ctr(){
     return $data->get_last_order_cls();
 }
 
+function get_orders_ctr(){
+    $data = new orders_class();
+    return $data-> get_orders_cls();
+}
+
 //--UPDATE--//
 
 //--DELETE--//

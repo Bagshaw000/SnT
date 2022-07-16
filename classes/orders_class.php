@@ -33,6 +33,10 @@ class orders_class extends db_connection
 		return $this->db_fetch_one($sql);
 	}
 
+    function get_orders_cls(){
+        $sql="SELECT * FROM `orders` INNER JOIN `users` on orders.u_id=users.u_id";
+        return $this->db_fetch_all($sql);
+    }
    
 
 	//--UPDATE--//

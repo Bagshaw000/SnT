@@ -3,13 +3,13 @@
 require_once("../classes/product_class.php");
 
 //sanitize data
-function cleanText($data) 
-{
-  $data = trim($data);
-  //$data = stripslashes($data);
-  //$data = htmlspecialchars($data);
-  return $data;
-}
+// function cleanText($data) 
+// {
+//   $data = trim($data);
+//   //$data = stripslashes($data);
+//   //$data = htmlspecialchars($data);
+//   return $data;
+// }
 
 
 

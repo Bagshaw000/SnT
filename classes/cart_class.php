@@ -61,13 +61,20 @@ class cart_class extends db_connection
     }
 
     function decrease_cart_cls($pid,$uid){
+      
         $sql = "UPDATE `cart` SET qty =(qty - 1)WHERE `p_id`='$pid' AND `u_id`='$uid'";
         return $this->db_query($sql);
     }
 
     function decrease_cart_ip_cls($pid,$ip_add){
+        $data= $this->select_prod_ip_cls($pid, $ip_add);
+       
+        if($data[0]['qty']==1){
+          return   $this->delete_from_cart_cls($pid,$ip_add);
+        }
+        else{
         $sql = "UPDATE `cart` SET qty = (qty - 1) WHERE `p_id`='$pid' AND `ip_add`='$ip_add'";
-        return $this->db_query($sql);
+        return $this->db_query($sql);}
     }
 
 
