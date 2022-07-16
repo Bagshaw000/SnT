@@ -25,6 +25,10 @@ function select_orders_ctr(){
     return $data->select_orders_cls();   
 }
 
+function get_last_order_ctr(){
+    $data = new orders_class();
+    return $data->get_last_order_cls();
+}
 
 //--UPDATE--//
 

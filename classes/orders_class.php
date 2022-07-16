@@ -28,6 +28,10 @@ class orders_class extends db_connection
 
         return $this->db_fetch_all($sql);
     }
+    function get_last_order_cls(){
+		$sql="SELECT `order_id` FROM `orders` ORDER BY  `order_id` DESC LIMIT  1";
+		return $this->db_fetch_one($sql);
+	}
 
    
 

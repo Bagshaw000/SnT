@@ -74,8 +74,8 @@ class cart_class extends db_connection
 
 
 	//--DELETE--//
-    function delete_from_cart_cls($pid,$uid){
-        $sql= "DELETE FROM `cart` WHERE `p_id`='$pid' AND `u_id`=$uid";
+    function delete_from_cart_cls($pid,$ip_add){
+        $sql= "DELETE FROM `cart` WHERE `p_id`='$pid' AND `ip_add`='$ip_add'";
         return $this->db_query($sql);
 
     }

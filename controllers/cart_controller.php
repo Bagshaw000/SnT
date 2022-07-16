@@ -47,6 +47,10 @@ function select_cart_count_ctr($ip_add){
     $data = new cart_class();
     return count( $data->select_cart_count_cls($ip_add));
 }
+function select_cart_user_ctr($ip_add){
+    $data = new cart_class();
+    return $data->select_cart_count_cls($ip_add);
+}
 
 //UPDATE
 function increase_cart_ctr($pid,$uid){
@@ -64,7 +68,7 @@ function decrease_cart_ip_ctr($pid,$ip_add){
 }
 
 //DELETE
-function delete_from_cart_ctr($pid,$uid){
+function delete_from_cart_ctr($pid,$ip_add){
     $data = new cart_class();
-    return $data->delete_from_cart_cls($pid,$uid);
+    return $data->delete_from_cart_cls($pid,$ip_add);
 }

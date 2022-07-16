@@ -115,10 +115,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
        
             $total = select_total_price_ctr($_SESSION['uid']);
             $item_data=select_prod_cart_ctr($_SESSION['uid']);
-            print_r($item_data);
-            
-            echo($item_data[0]['email']);
-           
+                              
     
 			 foreach($item_data as $item){
 			 ?>
@@ -145,7 +142,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                      echo("AUD"); echo($item["p_price"]); ?></h4>	 	     		
    	 	     	</td>
    	 	     	<td class="top-remove">
-   	 	     		<h4><?php echo("GHC"); echo($item["p_price"] * $item["qty"]); ?></h4>
+   	 	     		<h4><?php echo("AUD"); echo($item["p_price"] * $item["qty"]); ?></h4>
                        
                    
    	 	     	</td>
@@ -161,8 +158,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
    	 <div class="vocher">
    	 	
    	 	<div class="dis-total">
-   	 		<h1>Total GHC <?php 
-              echo $total["SUM(product.p_price * cart.qty)"] ?></h1>
+            <div style="display:flex">
+                <textarea name="" id="add" cols="30" rows="5" placeholder="Enter your billing address"></textarea>
+                <h1>Total AUD <?php 
+              echo $total["SUM(product.p_price * cart.qty)"] ?></h1></div>
+
+   	 		
    	 		<div class="tot-btn">
    	 			<a class="shop" href="index.php">Back to Shop</a>
    	 			<a class="check" onclick="payment('<?php echo $item_data[0]['email']?>','<?php echo $total['SUM(product.p_price * cart.qty)'] ?>')">Pay</a>
