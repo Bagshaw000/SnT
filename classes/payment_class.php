@@ -28,6 +28,11 @@ class payment_class extends db_connection
 		return $this->db_fetch_all($sql);
 	}
 
+	function select_all_payment_cls(){
+		$sql="SELECT * FROM `payment` INNER JOIN `users` on payment.u_id = users.u_id";
+		return $this->db_fetch_all($sql);
+	}
+
 
 
 	//--UPDATE--//

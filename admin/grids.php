@@ -276,12 +276,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 				echo "<td>$ $price</td>\n";
 				
 				echo "<td><a href='media.php?p_id=$id' class='btn' data-bs-toggle='modal' data-bs-target='#staticBackdrop'>Edit</td>";
-				echo "<td>
-				
-				
-				<button onclick='deleteProduct($id)'>Delete</button>
-				
-				</td>";
 				
 				echo "</tr>";
 		}

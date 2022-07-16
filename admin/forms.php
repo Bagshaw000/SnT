@@ -271,13 +271,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 										// }
 									</script>
 									<?php
-									$orders = select_payment_ctr();
-								
+									$orders = select_all_payment_ctr();
+									
 									if ($orders) {
 										foreach ($orders as $item) {
 
-											$user_data=	select_user_id_ctr($item["u_id"]);
-											$user_name= $user_data['f_name'] +" "+$user_data['l_name'];
+											
+											$user_name= $item['f_name']." ". $item['l_name'];
 											$order_id= $item["order_id"];
 											$amount= $item["amount"];
 											$pay_date= $item["payment_date"];

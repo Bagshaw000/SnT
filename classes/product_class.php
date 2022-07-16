@@ -45,7 +45,7 @@ class product_class extends db_connection
 	//--DELETE--//
 
     function delete_product_cls($p_id){
-        $sql="DELETE  FROM `product` WHERE `p_id`='$p_id'";
+        $sql="DELETE * FROM `product` WHERE `p_id`='$p_id'";
         return $this->db_query($sql); 
     }
 	

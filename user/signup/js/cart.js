@@ -124,7 +124,7 @@ function payment(email, amt){
       }else{
         alert ("Payment Failed");
       }
-        alert(message);
+       
       }
     });
     handler.openIframe();

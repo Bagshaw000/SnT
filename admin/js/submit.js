@@ -61,8 +61,7 @@ function addProduct(){
 
 function updateProduct(){
     event.preventDefault();
-    alert("me");
-    event.preventDefault();
+   
     p_name = document.getElementById('name').value;
     p_desc = document.getElementById("description").value;
     p_price= document.getElementById("price").value;

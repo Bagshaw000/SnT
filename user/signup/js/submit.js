@@ -95,7 +95,7 @@ console.log(passes);
             data: dataString,
             cache:false,
             success:function(result){
-                alert(result);
+               
             }
         })
 	}else {
@@ -153,8 +153,7 @@ console.log(passes);
             data: dataString,
             cache:false,
             success:function(result){
-				console.log(result);
-				alert(result);
+				
                 if(result == "success"){
                     window.location= "../index.php";
                 }

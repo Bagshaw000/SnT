@@ -24,6 +24,11 @@ function select_payment_ctr(){
   return $data->select_payment_cls();
 }
 
+function select_all_payment_ctr(){
+  $data = new payment_class();
+  return $data->select_all_payment_cls();
+}
+
 //--UPDATE--//
 
 //--DELETE--//
