@@ -14,7 +14,7 @@ class product_class extends db_connection
 {
 	//--INSERT--//
     function select_all_product_cls(){
-        $sql ="SELECT `p_id`, `cat_id`, `p_desc`, `p_price`, `p_image` FROM `product`";
+        $sql ="SELECT * FROM `product`";
         return $this->db_fetch_all($sql);
     }
 	
@@ -26,12 +26,17 @@ class product_class extends db_connection
         return $this->db_query($sql);   
     }
 
+    function select_prod_id_cls($p_id){
+        $sql ="SELECT * FROM `product` WHERE `p_id`='$p_id'";
+        return $this->db_fetch_one($sql);
+    }
+
     
 
 	//--UPDATE--//
 
-    function update_product_cls($cat_id,$p_desc,$p_price,$p_image){
-        $sql="UPDATE `product` SET `cat_id`='$cat_id',`p_desc`='$p_desc',`p_price`='$p_price',`p_image`='$p_image'";
+    function update_product_cls($pid,$p_name,$cat_id,$p_desc,$p_price){
+        $sql="UPDATE `product` SET `p_name`='$p_name', `cat_id`='$cat_id',`p_desc`='$p_desc',`p_price`='$p_price' WHERE `p_id`='$pid'";
         return $this->db_query($sql);   
     }
 
@@ -39,8 +44,8 @@ class product_class extends db_connection
 
 	//--DELETE--//
 
-    function delete_product_cls($cat_id){
-        $sql="DELETE * FROM `product` WHERE `cat_id`='$cat_id'";
+    function delete_product_cls($p_id){
+        $sql="DELETE  FROM `product` WHERE `p_id`='$p_id'";
         return $this->db_query($sql); 
     }
 	

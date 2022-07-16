@@ -8,8 +8,10 @@ ob_start();
 //funtion to check for login
 function check_login(){
     if (!isset($_SESSION['uid'])){
+        echo($_SESSION['uid']);
         return false;
     }
+    // echo($_SESSION['uid']);
     return true;
 }
 

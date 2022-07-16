@@ -81,7 +81,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
    <input type="password" id="pass1" name="name" placeholder="Password" required="">
    <small id="email_error1" style="color:white">Email or password incorrect</small>
    </div>
-   <a onclick="onLogin()"><input type="submit" value="LOGIN" /></a>
+   <a ><input type="button" value="LOGIN" onclick="onLogin()" /></a>
    <a class="close" href="#close"></a>
    </form>
 </div>

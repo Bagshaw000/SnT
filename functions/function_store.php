@@ -33,3 +33,7 @@ function upload_file($directory,$subdir,$tempname,$image){
     return false;
    
 }
+
+function get_ip_add(){
+    return $_SERVER['REMOTE_ADDR'];
+}

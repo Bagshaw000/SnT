@@ -67,7 +67,7 @@ console.log(passes);
         })
 	}else {
 
-		alert("something is off");
+		//
 	}
 
 	return false;
@@ -122,14 +122,15 @@ function onLogin(){
             cache:false,
             success:function(result){
 				alert(result);
+                console.log(result);
                 if(result == "success"){
                     window.location= "../media.php";
                 }
             }
         })
 	}else {
-
-		alert("something is off");
+        alert("something is wrong");
+		// ;
 	}
 
 }

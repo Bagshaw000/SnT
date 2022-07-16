@@ -1,5 +1,5 @@
 <?php
-session_start(); 
+
 //connect to the user account class
 require_once("../classes/user_class.php");
 require_once("../functions/function_store.php");
@@ -65,6 +65,7 @@ function select_user_ctr($email,$password){
             return false;
         }
         else {
+            session_start();
             $_SESSION['uid']=$user_data['u_id'];
             $_SESSION['role']=$user_data['u_perm'];
             return true;
@@ -96,6 +97,7 @@ function select_admin_ctr($email,$password){
             return false;
         }
         else {
+            session_start();
             $_SESSION['aid']=$user_data['u_id'];
             return true;
         }

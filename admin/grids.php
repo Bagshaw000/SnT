@@ -53,6 +53,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <link href="css/custom.css" rel="stylesheet">
 <!--//Metis Menu -->
 
+<script src="js/submit.js"></script>
+
 </head>
 <body class="cbp-spmenu-push">
 	<div class="main-content">
@@ -216,7 +218,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</div>
 							</a>
 							<ul class="dropdown-menu drp-mnu">
-                                        <script src="../js/auth.js"></script>
+                                        <!-- <script src="../js/auth.js"></script> -->
 								<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
 								<li> <a href="#"><i class="fa fa-user"></i> My Account</a> </li>
 								<li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li>
@@ -248,13 +250,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     </tr>
   </thead>
   <tbody>
-	<script src="../js/upload_book.js"></script>
+	<!-- <script src="../js/upload_book.js"></script> -->
 	<?php
 		 $prod = select_all_product_ctr();
-
+			
 
 		foreach ($prod as $item) {
 			$id = $item['p_id'];
+			
 			$c_id = $item["cat_id"];
 			$cat = select_one_cat_ctr($c_id)['cat_name'];
 		
@@ -266,14 +269,19 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 				echo "<td>
 
 					<img  style='width: 5em;heigth:5em' src='$image' style='display:block'>
-					$id
+					
 				</td>";
 				echo "<td>$cat</td>\n";
 				echo "<td>$desc</td>\n";
 				echo "<td>$ $price</td>\n";
 				
-				echo "<td><a href='media.php?id=$id' class='btn'>Edit</td>";
-				echo "<td><a href='media.php?id=$id' class='btn'>Delete</td>";
+				echo "<td><a href='media.php?p_id=$id' class='btn' data-bs-toggle='modal' data-bs-target='#staticBackdrop'>Edit</td>";
+				echo "<td>
+				
+				
+				<button onclick='deleteProduct($id)'>Delete</button>
+				
+				</td>";
 				
 				echo "</tr>";
 		}
@@ -282,12 +290,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
   </tbody>
 </table>
-
+<!-- <script src="text/JavaScript">
+	function refresh(t){
+	setTimeout(() => {
+		"location.reload(true);"
+	}, t);}
+</script> -->
 				</div>
-				<h3 class="title1">Bootstrap Grid Details</h3>
-				<div class="grid-bottom widget-shadow">
-
-				</div>
+				
 			</div>
 		</div>
 		<!--footer-->

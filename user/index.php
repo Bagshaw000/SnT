@@ -1,3 +1,11 @@
+
+<?php
+require_once("../settings/core.php");
+require_once("../controllers/user_controller.php");
+// echo($_SESSION['uid']);
+
+
+?>
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -9,7 +17,7 @@ Author URL: http://w3layouts.com
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Bistros - Restaurants Category Responsive Website Template - Home : W3Layouts</title>
+    <title>SnT - Restaurants Category Responsive Website Template - Home : W3Layouts</title>
     <!-- google-fonts -->
     <link href="//fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -18,7 +26,7 @@ Author URL: http://w3layouts.com
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/style-starter.css">
 </head>
 
@@ -29,7 +37,7 @@ Author URL: http://w3layouts.com
             <nav class="navbar navbar-expand-lg stroke">
                 <h1>
                     <a class="navbar-brand d-flex align-items-center" href="index.php">
-                        Bistros <i class="fa fa-cutlery ml-2" aria-hidden="true"></i></a>
+                        SnT <i class="fa fa-cutlery ml-2" aria-hidden="true"></i></a>
                 </h1>
                 <!-- if logo is image enable this   
     <a class="navbar-brand" href="#index.php">
@@ -53,7 +61,10 @@ Author URL: http://w3layouts.com
                         <li class="nav-item">
                             <a class="nav-link" href="menu.php">Menu</a>
                         </li>
-                        <li>
+                        <?php if (!(check_login())) {
+                            
+                            ?>
+                        <li class="nav-item">
                             <div class="dropdown-center">
                                 <a class="btn btn-secondary dropdown-toggle light" style="background-color: transparent;border: 0px"
                                  href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -63,9 +74,31 @@ Author URL: http://w3layouts.com
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <li><a class="dropdown-item" href="signup">Login</a></li>
                                     <li><a class="dropdown-item" href="#">Sign Up</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                   
                                 </ul>
                             </div>
+                        </li>
+
+                        <?php
+                        }else{?>
+                           <li class="nav-item">
+                            <div class="dropdown-center">
+                                <a class="btn btn-secondary dropdown-toggle nav-link" style="background-color: transparent;border: 0px"
+                                 href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    ACCOUNT
+                                </a>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="signup">Logout</a></li>
+                                    <li><a class="dropdown-item" href="#">Sign Up</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
+
+                        <?php } ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Cart()</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.php">Contact Us</a>
@@ -111,7 +144,7 @@ Author URL: http://w3layouts.com
             <div class="row">
                 <div class="col-md-6 banner-left d-flex align-items-center pl-lg-5">
                     <div>
-                        <h3 class="text-white mb-4">Welcome to Bistros <br>
+                        <h3 class="text-white mb-4">Welcome to SnT <br>
                             Healthy <span class="type-js"><span class="text-js">Fresh Meals!</span></span></h3>
                         <p class="banner-text text-white">Open Everyday - <span>7 Am to 10 Pm</span>
                         </p>
@@ -317,7 +350,7 @@ Author URL: http://w3layouts.com
                             <figure>
                                 <img src="assets/images/g1.jpg" alt="product" class="img-fluid">
                                 <div class="p-4">
-                                    <p>Bistros</p>
+                                    <p>SnT</p>
                                     <a href="menu.php" class="mb-5 img-title">Noodles</a>
                                 </div>
                             </figure>
@@ -328,7 +361,7 @@ Author URL: http://w3layouts.com
                             <figure>
                                 <img src="assets/images/g2.jpg" alt="product" class="img-fluid">
                                 <div class="p-4">
-                                    <p>Bistros</p>
+                                    <p>SnT</p>
                                     <a href="menu.php" class="mb-5 img-title">Cakes</a>
                                 </div>
                             </figure>
@@ -339,7 +372,7 @@ Author URL: http://w3layouts.com
                             <figure>
                                 <img src="assets/images/g3.jpg" alt="product" class="img-fluid">
                                 <div class="p-4">
-                                    <p>Bistros</p>
+                                    <p>SnT</p>
                                     <a href="menu.php" class="mb-5 img-title">Pizzas</a>
                                 </div>
                             </figure>
@@ -350,7 +383,7 @@ Author URL: http://w3layouts.com
                             <figure>
                                 <img src="assets/images/g4.jpg" alt="product" class="img-fluid">
                                 <div class="p-4">
-                                    <p>Bistros</p>
+                                    <p>SnT</p>
                                     <a href="menu.php" class="mb-5 img-title">Drinks</a>
                                 </div>
                             </figure>
@@ -361,7 +394,7 @@ Author URL: http://w3layouts.com
                             <figure>
                                 <img src="assets/images/g5.jpg" alt="product" class="img-fluid">
                                 <div class="p-4">
-                                    <p>Bistros</p>
+                                    <p>SnT</p>
                                     <a href="menu.php" class="mb-5 img-title">Hamburgers</a>
                                 </div>
                             </figure>
@@ -372,7 +405,7 @@ Author URL: http://w3layouts.com
                             <figure>
                                 <img src="assets/images/g6.jpg" alt="product" class="img-fluid">
                                 <div class="p-4">
-                                    <p>Bistros</p>
+                                    <p>SnT</p>
                                     <a href="menu.php" class="mb-5 img-title">Meals</a>
                                 </div>
                             </figure>
@@ -394,7 +427,7 @@ Author URL: http://w3layouts.com
                 <div class="w3l-footer-texthny-inf">
                     <h2>
                         <a class="d-flex align-items-center logo-2" href="index.php">
-                            Bistros <i class="fa fa-cutlery ml-2" aria-hidden="true"></i></a>
+                            SnT <i class="fa fa-cutlery ml-2" aria-hidden="true"></i></a>
                     </h2>
                     <div class="footer-list-cont d-flex align-items-center justify-content-between mt-md-5 mt-4 mb-5">
                         <h6 class="foot-sub-title">Contact Us</h6>
@@ -421,8 +454,8 @@ Author URL: http://w3layouts.com
                         </div>
                         <div class="address-grid mt-sm-5 mt-4">
                             <h5>E-mail</h5>
-                            <h5 class="email-cont-text mt-1"> <a href="mailto:bistros@mail.com"
-                                    class="mail">bistros@mail.com</a></h5>
+                            <h5 class="email-cont-text mt-1"> <a href="mailto:SnT@mail.com"
+                                    class="mail">SnT@mail.com</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-6 col-sm-5 footer-list-menu pl-lg-0 mt-lg-0 mt-sm-5 mt-4">
@@ -448,7 +481,7 @@ Author URL: http://w3layouts.com
                 <!-- copyright -->
                 <div class="w3l-copyright mt-lg-5 mt-sm-4 pt-md-4 pt-3">
                     <div class="row bottom-copies pt-md-5 pt-4 mt-md-5 mt-4">
-                        <p class="col-lg-8 copy-footer-29">© 2021 Bistros. All rights reserved. Design by <a
+                        <p class="col-lg-8 copy-footer-29">© 2021 SnT. All rights reserved. Design by <a
                                 href="https://w3layouts.com/" target="_blank">
                                 W3layouts</a></p>
 

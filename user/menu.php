@@ -1,3 +1,14 @@
+<?php
+require_once("../settings/core.php");
+require_once("../controllers/product_controller.php");
+require_once("../controllers/cart_controller.php");
+require_once("../functions/function_store.php");
+ 
+
+$cart_data= select_cart_count_ctr(get_ip_add());
+
+?>
+
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -11,11 +22,21 @@ Author URL: http://w3layouts.com
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Bistros - Restaurants Category Responsive Website Template - Menu : W3Layouts</title>
     <!-- google-fonts -->
+    
     <link href="//fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <!-- //google-fonts -->
+    <!-- //google-fonts
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+     JavaScript Bundle with Popper -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    --> 
     <!-- Template CSS Style link -->
+    <script src="signup/js/cart.js"></script>
     <link rel="stylesheet" href="assets/css/style-starter.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    
 </head>
 
 <body>
@@ -48,6 +69,45 @@ Author URL: http://w3layouts.com
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="menu.php">Menu</a>
+                        </li>
+                        <?php if (!(check_login())) {
+                            
+                            ?>
+                        <li class="nav-item">
+                            <div class="dropdown-center">
+                                <a class="btn btn-secondary dropdown-toggle light" style="background-color: transparent;border: 0px"
+                                 href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    ACCOUNT
+                                </a>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="signup">Login</a></li>
+                                    <li><a class="dropdown-item" href="#">Sign Up</a></li>
+                                   
+                                </ul>
+                            </div>
+                        </li>
+
+                        <?php
+                        }else{?>
+                           <li class="nav-item">
+                            <div class="dropdown-center">
+                                <a class="btn btn-secondary dropdown-toggle nav-link" style="background-color: transparent;border: 0px"
+                                 href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    ACCOUNT
+                                </a>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="signup">Logout</a></li>
+                                    <li><a class="dropdown-item" href="#">Sign Up</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
+
+                        <?php } ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cart.php">Cart(<?php echo $cart_data?>)</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="contact.php">Contact Us</a>
@@ -103,347 +163,51 @@ Author URL: http://w3layouts.com
     <!-- menu -->
     <div class="menu-w3ls py-5" id="menu">
         <div class="container py-md-5 py-4">
-            <h3 class="title-big mb-2">Breakfast</h3>
+            <h3 class="title-big mb-2">Menu</h3>
             <div class="row menu-body">
+            <?php 
+                    $data = select_all_product_ctr();
+                  
+
+                    foreach ($data as $item){
+
+                    ?>
                 <!-- Section starts: Breakfast -->
-                <div class="col-lg-6 menu-section">
+                <div class="col-lg-6 menu-section" style="display:flex">
                     <!-- Item starts -->
+                    
                     <div class="menu-item">
                         <div class="row no-gutters">
+                            
+                            <div><img src="img.png" alt="" srcset=""></div>
                             <div class="col-9 menu-item-name">
-                                <h6>Tomato Toast “Ricotta”</h6>
+                                <h6 style="color:#fd7e14"><?php echo $item['p_name']?></h6>
                             </div>
                             <div class="col-3 menu-item-price text-right">
-                                <h6>$36</h6>
+                                <h6><?php echo("$"); echo $item['p_price']?></h6>
                             </div>
+                            <?php if (!(check_login())) {?>
+                            <div onclick="addCart_ip()" style="float:left"><button style="width:5vw; border-radius:5px; color:white; background-color:#fd7e14; border:solid #fd7e14 1px 
+                            ">Cart</button></div>
+                            <?php }else{?>
+                                <div style="margin-left:-10px" ><button onclick="addCart_id(<?php echo $item['p_id']?>)" style="width:5vw; border-radius:5px; color:white; background-color:#fd7e14; border:solid #fd7e14 1px 
+                            ">Cart</button></div>
+                            <?php } ?>
+                            
                         </div>
                         <div class="menu-item-description">
-                            <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
+                            <p><?php echo $item['p_desc']?>.</p>
                         </div>
                     </div>
+                   
                     <!-- Item ends -->
-                    <!-- Item starts -->
-                    <div class="menu-item">
-                        <div class="row no-gutters">
-                            <div class="col-9 menu-item-name">
-                                <h6>Avocado Toast with Egg</h6>
-                            </div>
-                            <div class="col-3 menu-item-price text-right">
-                                <h6>$28</h6>
-                            </div>
-                        </div>
-                        <div class="menu-item-description">
-                            <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                        </div>
-                    </div>
-                    <!-- Item ends -->
-                    <!-- Item starts -->
-                    <div class="menu-item">
-                        <div class="row no-gutters">
-                            <div class="col-9 menu-item-name">
-                                <h6>Nut, Banana & Seed Toast</h6>
-                            </div>
-                            <div class="col-3 menu-item-price text-right">
-                                <h6>$18</h6>
-                            </div>
-                        </div>
-                        <div class="menu-item-description">
-                            <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                        </div>
-                    </div>
-                    <!-- Item ends -->
-                    <!-- Item starts -->
-                    <div class="menu-item">
-                        <div class="row no-gutters">
-                            <div class="col-9 menu-item-name">
-                                <h6>Berry & Yogurt Smoothie</h6>
-                            </div>
-                            <div class="col-3 menu-item-price text-right">
-                                <h6>$76</h6>
-                            </div>
-                        </div>
-                        <div class="menu-item-description">
-                            <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                        </div>
-                    </div>
-                    <!-- Item ends -->
-                </div>
-                <!-- Section ends: Breakfast -->
+           
+                                  
+                 <!-- Section ends: Breakfast -->
+                 </div>
 
-                <!-- Section starts: Breakfast -->
-                <div class="col-lg-6 menu-section pl-lg-5">
-                    <!-- Item starts -->
-                    <div class="menu-item">
-                        <div class="row no-gutters">
-                            <div class="col-9 menu-item-name">
-                                <h6>Berry Breakfast Parfait</h6>
-                            </div>
-                            <div class="col-3 menu-item-price text-right">
-                                <h6>$13</h6>
-                            </div>
-                        </div>
-                        <div class="menu-item-description">
-                            <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                        </div>
-                    </div>
-                    <!-- Item ends -->
-                    <!-- Item starts -->
-                    <div class="menu-item">
-                        <div class="row no-gutters">
-                            <div class="col-9 menu-item-name">
-                                <h6>Peanut Butter & Banana</h6>
-                            </div>
-                            <div class="col-3 menu-item-price text-right">
-                                <h6>$32</h6>
-                            </div>
-                        </div>
-                        <div class="menu-item-description">
-                            <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                        </div>
-                    </div>
-                    <!-- Item ends -->
-                    <!-- Item starts -->
-                    <div class="menu-item">
-                        <div class="row no-gutters">
-                            <div class="col-9 menu-item-name">
-                                <h6>Quinoa Fruit Salad</h6>
-                            </div>
-                            <div class="col-3 menu-item-price text-right">
-                                <h6>$76</h6>
-                            </div>
-                        </div>
-                        <div class="menu-item-description">
-                            <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                        </div>
-                    </div>
-                    <!-- Item ends -->
-                    <!-- Item starts -->
-                    <div class="menu-item">
-                        <div class="row no-gutters">
-                            <div class="col-9 menu-item-name">
-                                <h6>Pumpkin Yogurt Parfait</h6>
-                            </div>
-                            <div class="col-3 menu-item-price text-right">
-                                <h6>$26</h6>
-                            </div>
-                        </div>
-                        <div class="menu-item-description">
-                            <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                        </div>
-                    </div>
-                    <!-- Item ends -->
-                </div>
-                <!-- Section ends: Breakfast -->
-            </div>
-
-            <div class="another-sec">
-                <h3 class="title-big mb-2">Lunch</h3>
-                <div class="row menu-body">
-                    <!-- Section starts: Lunch -->
-                    <div class="col-lg-6 menu-section pr-lg-5">
-                        <!-- Item starts -->
-                        <div class="menu-item">
-                            <div class="row no-gutters">
-                                <div class="col-9 menu-item-name">
-                                    <h6>Grilled Lamb & Feta Pita</h6>
-                                </div>
-                                <div class="col-3 menu-item-price text-right">
-                                    <h6>$63</h6>
-                                </div>
-                            </div>
-                            <div class="menu-item-description">
-                                <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <!-- Item ends -->
-                        <!-- Item starts -->
-                        <div class="menu-item">
-                            <div class="row no-gutters">
-                                <div class="col-9 menu-item-name">
-                                    <h6>The Ultimate Veggie</h6>
-                                </div>
-                                <div class="col-3 menu-item-price text-right">
-                                    <h6>$36</h6>
-                                </div>
-                            </div>
-                            <div class="menu-item-description">
-                                <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <!-- Item ends -->
-                        <!-- Item starts -->
-                        <div class="menu-item">
-                            <div class="row no-gutters">
-                                <div class="col-9 menu-item-name">
-                                    <h6>Chicken Salad Lunch Box</h6>
-                                </div>
-                                <div class="col-3 menu-item-price text-right">
-                                    <h6>$23</h6>
-                                </div>
-                            </div>
-                            <div class="menu-item-description">
-                                <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <!-- Item ends -->
-                    </div>
-                    <!-- Section ends: Lunch -->
-
-                    <!-- Section starts: Lunch -->
-                    <div class="col-lg-6 menu-section pl-lg-5">
-                        <!-- Item starts -->
-                        <div class="menu-item">
-                            <div class="row no-gutters">
-                                <div class="col-9 menu-item-name">
-                                    <h6>Coriander Chicken and Rice</h6>
-                                </div>
-                                <div class="col-3 menu-item-price text-right">
-                                    <h6>$46</h6>
-                                </div>
-                            </div>
-                            <div class="menu-item-description">
-                                <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <!-- Item ends -->
-                        <!-- Item starts -->
-                        <div class="menu-item">
-                            <div class="row no-gutters">
-                                <div class="col-9 menu-item-name">
-                                    <h6>The plate of barbeque</h6>
-                                </div>
-                                <div class="col-3 menu-item-price text-right">
-                                    <h6>$26</h6>
-                                </div>
-                            </div>
-                            <div class="menu-item-description">
-                                <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <!-- Item ends -->
-                        <!-- Item starts -->
-                        <div class="menu-item">
-                            <div class="row no-gutters">
-                                <div class="col-9 menu-item-name">
-                                    <h6>Chicken grill with sauce</h6>
-                                </div>
-                                <div class="col-3 menu-item-price text-right">
-                                    <h6>$67</h6>
-                                </div>
-                            </div>
-                            <div class="menu-item-description">
-                                <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <!-- Item ends -->
-                    </div>
-                    <!-- Section ends: Lunch -->
-                </div>
-            </div>
-
-            <div class="another-sec">
-                <h3 class="title-big mb-2">Dinner</h3>
-                <div class="row menu-body">
-                    <!-- Section starts: Dinner -->
-                    <div class="col-lg-6 menu-section pr-lg-5">
-                        <!-- Item starts -->
-                        <div class="menu-item">
-                            <div class="row no-gutters">
-                                <div class="col-9 menu-item-name">
-                                    <h6>The Ultimate Veggie</h6>
-                                </div>
-                                <div class="col-3 menu-item-price text-right">
-                                    <h6>$52</h6>
-                                </div>
-                            </div>
-                            <div class="menu-item-description">
-                                <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <!-- Item ends -->
-                        <!-- Item starts -->
-                        <div class="menu-item">
-                            <div class="row no-gutters">
-                                <div class="col-9 menu-item-name">
-                                    <h6>Chicken grill with sauce</h6>
-                                </div>
-                                <div class="col-3 menu-item-price text-right">
-                                    <h6>$46</h6>
-                                </div>
-                            </div>
-                            <div class="menu-item-description">
-                                <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <!-- Item ends -->
-                        <!-- Item starts -->
-                        <div class="menu-item">
-                            <div class="row no-gutters">
-                                <div class="col-9 menu-item-name">
-                                    <h6>Quinoa Fruit Salad</h6>
-                                </div>
-                                <div class="col-3 menu-item-price text-right">
-                                    <h6>$56</h6>
-                                </div>
-                            </div>
-                            <div class="menu-item-description">
-                                <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <!-- Item ends -->
-                    </div>
-                    <!-- Section ends: Dinner -->
-
-                    <!-- Section starts: Dinner -->
-                    <div class="col-lg-6 menu-section pl-lg-5">
-                        <!-- Item starts -->
-                        <div class="menu-item">
-                            <div class="row no-gutters">
-                                <div class="col-9 menu-item-name">
-                                    <h6>Avocado Toast with Egg</h6>
-                                </div>
-                                <div class="col-3 menu-item-price text-right">
-                                    <h6>$26</h6>
-                                </div>
-                            </div>
-                            <div class="menu-item-description">
-                                <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <!-- Item ends -->
-                        <!-- Item starts -->
-                        <div class="menu-item">
-                            <div class="row no-gutters">
-                                <div class="col-9 menu-item-name">
-                                    <h6>Tomato Toast Ricotta</h6>
-                                </div>
-                                <div class="col-3 menu-item-price text-right">
-                                    <h6>$26</h6>
-                                </div>
-                            </div>
-                            <div class="menu-item-description">
-                                <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <!-- Item ends -->
-                        <!-- Item starts -->
-                        <div class="menu-item">
-                            <div class="row no-gutters">
-                                <div class="col-9 menu-item-name">
-                                    <h6>Grilled Lamb & Feta Pita</h6>
-                                </div>
-                                <div class="col-3 menu-item-price text-right">
-                                    <h6>$72</h6>
-                                </div>
-                            </div>
-                            <div class="menu-item-description">
-                                <p>Lorem ipsum dolor sit amet, consectetur tredjh adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <!-- Item ends -->
-                    </div>
-                    <!-- Section ends: Dinner -->
-                </div>
+                 <?php }?>
+                 
             </div>
         </div>
     </div>

@@ -11,7 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 // require_once("../controllers/book_controller.php");
 // require_once("../controllers/claim_controller.php");
 require_once("../settings/core.php");
-include("../controllers/user_controller.php");
+require_once("../controllers/user_controller.php");
 //include("../controllers/orders_controller.php");
 
 
@@ -320,6 +320,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <div class="stats">
                                 <h5><strong><?php
                                     echo(select_all_user_ctr());
+                                    echo($_SESSION['aid']);
                                 ?></strong></h5>
                                 <span>Total Users</span>
                             </div>

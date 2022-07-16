@@ -100,16 +100,15 @@ console.log(passes);
         })
 	}else {
 
-		alert("something is off");
+		
 	}
 
 	return false;
 
 }
 
-function onLogin(){
-    
-    event.preventDefault();
+ function onLogin(){
+	event.preventDefault();
     email= document.getElementById("email1").value;
     pass= document.getElementById("pass1").value;
     var passes = false;
@@ -154,6 +153,8 @@ function onLogin(){
             data: dataString,
             cache:false,
             success:function(result){
+				console.log(result);
+				alert(result);
                 if(result == "success"){
                     window.location= "../index.php";
                 }
@@ -161,10 +162,10 @@ function onLogin(){
         })
 	}else {
 
-		alert("something is off");
+		// ;
 	}
 
+    
 }
-
 
 

@@ -16,7 +16,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 if (!(check_admin_login())) {
 	header("Location: signup/index.php");
 }
-$prod= select_all_cat_ctr();
+$cat= select_all_cat_ctr();
 
 
 ?>
@@ -211,8 +211,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					<h2 class="title1">Upload a book</h2>
 					<div class="bs-example5 widget-shadow" data-example-id="default-media">
 						<!-- Button trigger modal -->
-
-						<form id="fid" enctype='multipart/form-data'>
+						<?php if(!isset($_GET["p_id"])){
+							?>
+						<form  enctype='multipart/form-data'>
 							<div class="mb-3">
 								<label for="title" class="form-label">Product name</label>
 								<input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">
@@ -229,7 +230,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							
 							<select class="form-select" aria-label="Default select example" name="status" id="cat">
 								<?php
-									foreach($prod as $item){?>
+									foreach($cat as $item){?>
 										<option value="<?php echo($item["cat_id"])?>" selected><?php echo($item["cat_name"]);
 										?></option>
 									<?php	}
@@ -253,6 +254,51 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						
 
 						</form>
+						<?php
+						}else{
+							 $prod =select_prod_id_ctr($_GET["p_id"]);			
+						?>
+						
+						<form method="post">
+							<input type="hidden" name="p_id" id="p_id" value="<?php echo $_GET["p_id"];?>">
+							<div class="mb-3">
+								<label for="title" class="form-label">Product name</label>
+								<input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" value="<?php echo $prod['p_name'] ?>">
+							</div>
+							
+							<div class="mb-3">
+								<label for="description" class="form-label">Product description</label>
+								<textarea class="form-control" id="description" name="description" rows="3" value=""><?php echo $prod['p_desc'] ?></textarea>
+							</div>
+							<div class="mb-3">
+								<label for="price" class="form-label">Product price</label>
+								<input type="number" class="form-control" id="price" name="price" aria-describedby="emailHelp" value="<?php echo $prod['p_price'] ?>">
+							</div>
+							
+							<select class="form-select" aria-label="Default select example" name="status" id="cat">
+								<?php
+									foreach($cat as $item){
+								
+										?>
+										<option value="<?php echo($item["cat_id"])?>" selected><?php echo($item["cat_name"]);
+										?></option>
+									<?php	}
+								?>	
+						
+								
+							</select>
+							<div style="height:10px"></div>
+
+			
+							 <button type='submit' class='btn btn-primary' name="submit" onclick="updateProduct()">Update</button>
+						
+
+						</form>
+						
+						<?php
+						}							
+						?>
+
 					
 
 

@@ -20,7 +20,7 @@ function onAddCat(){
 
 function addProduct(){
     
-
+    event.preventDefault();
     p_name = document.getElementById('name').value;
     p_desc = document.getElementById("description").value;
     p_price= document.getElementById("price").value;
@@ -37,7 +37,7 @@ function addProduct(){
     formData.append("p_cat", p_cat);
     
 	
-    event.preventDefault();
+   
     
           
      console.log("bag");
@@ -57,8 +57,72 @@ function addProduct(){
         }
     }
 });
-    
+}
+
+function updateProduct(){
+    event.preventDefault();
+    alert("me");
+    event.preventDefault();
+    p_name = document.getElementById('name').value;
+    p_desc = document.getElementById("description").value;
+    p_price= document.getElementById("price").value;
+    p_cat= document.getElementById("cat").value;
+    p_id= document.getElementById("p_id").value;
+    console.log(p_desc);
+  
+    var formData = new FormData();
+   
+    formData.append("p_name", p_name);
+    formData.append("p_price", p_price);
+    formData.append("p_desc", p_desc);
+    formData.append("p_cat", p_cat);
+    formData.append("p_id",p_id);
+
+    $.ajax({
+    type:"POST",
+    url:"../actions/update_proc.php",
+    data: formData,
+    enctype: 'multipart/form-data',
+    processData:false,
+    contentType:false,
+    cache:false,
+    success:function(result){
+        alert(result);
+        console.log(result);
+        if(result == "success"){
+           //Alert in bootstrap
+        }
+    }
+});
+
+}
+
+function deleteProduct(id){
+    event.preventDefault();
+    alert("delete");
 
   
+    console.log(id);
+    var formData = new FormData();
+   
+    formData.append("p_id", id);
+
+    $.ajax({
+        type:"POST",
+        url:"../actions/delete_prod_proc.php",
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData:false,
+        contentType:false,
+        cache:false,
+        success:function(result){
+            alert(result);
+            console.log(result);
+            if(result == "success"){
+               
+            }
+        }
+    });
+
 
 }
